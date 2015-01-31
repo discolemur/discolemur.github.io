@@ -19,7 +19,7 @@ body {
 }
 
 .wrapper {
-  width: 640px;
+  width: 70%;
   margin: 0 auto;
   background: #DEDEDE;
   -webkit-border-radius: 8px;
@@ -213,6 +213,10 @@ h1 {
 
 h2 {
   color: #393939;
+}
+
+h3 {
+  text-align: center;
 }
 
 h3, h4, h5, h6 {
