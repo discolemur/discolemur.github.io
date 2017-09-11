@@ -1,0 +1,208 @@
+body {
+  padding: 0px 0;
+  margin: 0;
+  font: 16px;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  color: #555;
+}
+
+.wrapper {
+  position: absolute;
+  top:50px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  overflow-y:scroll;
+}
+
+header, section, footer {
+  display: block;
+}
+
+a {
+  color: #069;
+  text-decoration: none;
+}
+
+p {
+  font-family: 'DejaVu Serif';
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+strong {
+  color: #222;
+  font-weight: 700;
+}
+
+header {
+  background: #fff;
+  height: 30px;
+  padding: 10px 10px;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0px 2px rgba(0,0,0,.4);
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 24px;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-variant: small-caps;
+  line-height: 1.2;
+  color: #555;
+}
+section {
+  width: 640px;
+  margin: auto;
+  padding: 15px 20px;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #222;
+  padding: 0;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+p, ul, ol, table, pre, dl {
+  margin: 0 0 20px;
+}
+
+h1, h2, h3 {
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  color: #393939;
+}
+
+h3, h4, h5, h6 {
+  color: #494949;
+}
+
+blockquote {
+  margin: 0 -20px 20px;
+  padding: 15px 20px 1px 40px;
+  font-style: italic;
+  background: #ccc;
+  background: rgba(0, 0, 0, 0.06);
+  color: #222;
+}
+
+img {
+  max-width: 100%;
+}
+
+code, pre {
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  color: #333;
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+pre {
+  padding: 20px;
+  background: #3A3C42;
+  color: #f8f8f2;
+  margin: 0 -20px 20px;
+}
+pre code {
+  color: #f8f8f2;
+}
+li pre {
+  margin-left: -60px;
+  padding-left: 60px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+dt {
+  color: #222;
+}
+
+th {
+  color: #222;
+}
+
+small {
+  font-size: 14px;
+}
+
+hr {
+  border: 0;
+  background: #fff;
+  height: 1px;
+  margin: 0 0 20px;
+}
+
+footer {
+  background: #fff;
+  height: 30px;
+  width: 100%;
+  margin: 0 auto;
+}
+footer a {
+  color: #fff;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+footer p {
+  text-align: center;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+@media print, screen and (max-width: 740px) {
+  body {
+    padding: 0;
+  }
+
+  .wrapper {
+    width: 100%;
+  }
+
+  footer {
+    padding: 10px;
+    width: auto;
+  }
+  footer p {
+    float: none;
+    margin: 0;
+  }
+  footer p + p {
+    float: none;
+  }
+}
+@media print, screen and (max-width:580px) {
+  header ul {
+    display: none;
+  }
+
+  header p.view {
+    display: block;
+  }
+
+  header p {
+    width: 100%;
+  }
+}
+@media print {
+  header p.view a small:before {
+    content: 'at http://github.com/';
+  }
+}
