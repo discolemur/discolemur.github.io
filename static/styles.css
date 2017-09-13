@@ -1,18 +1,20 @@
 body {
-  padding: 0px 0;
+  padding: 0;
   margin: 0;
   font-size: 16px;
   font-family: 'Droid Sans', sans-serif;
   color: #555;
 }
 
-.wrapper {
-  position: absolute;
-  top:55px;
-  left:0px;
-  right:0px;
-  bottom:0px;
-  overflow-y:scroll;
+#topbar {
+  z-index: 1;
+  width: 100%;
+  position:absolute;
+  background: #fff;
+  height: 2.8em;
+  border-bottom: 0.063em solid #ccc;
+  box-shadow: 0 0 0.125em rgba(0,0,0,.4);
+  font-family: 'Droid Sans', sans-serif;
   text-align: center;
 }
 
@@ -30,12 +32,29 @@ body {
     max-width: 100%;
 }
 
+.wrapper {
+  position: absolute;
+  top: 2.8em;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow-y:scroll;
+}
+
+#intro {
+  padding-top: 5em;
+}
+#intro h1 , #intro h2 {
+  margin: 0;
+  line-height: 2;
+}
+
 #title_text {
   height:100%;
   width:100%;
   background-color: rgba(0,0,0,0);
 }
-#title_text h2 , #title_text h3 {
+#title_text h1 , #title_text h2 {
     position: absolute;
     text-align: center;
     top: 20%;
@@ -44,12 +63,12 @@ body {
     font-size: 50px;
     line-height: 4;
 }
-#title_text h3 {
-    padding-top: 25px;
+#title_text h2 {
+    padding-top: 1.5em;
     font-size: 24px;
 }
 
-header, #details, footer {
+#topbar, #details, footer {
   display: block;
 }
 
@@ -60,7 +79,6 @@ a {
 
 p {
   font-family: 'Martel', serif;
-  margin: 0 0 20px;
   padding: 0;
   line-height: 1.5;
 }
@@ -70,31 +88,22 @@ strong {
   font-weight: 700;
 }
 
-header {
-  background: #fff;
-  height: 35px;
-  padding: 10px 10px;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 0px 2px rgba(0,0,0,.4);
-  font-family: 'Droid Sans', sans-serif;
-  text-align: center;
-}
 #options {
   text-align: center;
   width: 10em;
   margin: auto;
 }
-header h1 {
+#topbar h1 {
   padding: 0;
   font-weight: normal;
   font-size: 20px;
   font-family: 'Droid Sans', sans-serif;
   font-variant: small-caps;
   line-height: 1.2;
-  padding-top: 10px;
+  padding-top: 0.625em;
   color: #555;
 }
-header a {
+#topbar a {
   color: #555;
 }
 
@@ -104,22 +113,24 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   line-height: 1.2;
 }
-h1, h2, h3 {
+h1, h2 {
   line-height: 2;
 }
 
 #section {
   background-color: #fff;
+  text-align: center;
 }
 #avatar {
-  max-width: 100%;
-  border-radius: 50px;
+  max-width: 80%;
+  border-radius: 3.125em;
   height: auto;
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
 #details {
   width: 50em;
   margin: auto;
-  padding: 15px 20px;
   background-color: #fff;
 }
 #details h1 {
@@ -133,18 +144,22 @@ h1, h2, h3 {
   letter-spacing: 1px;
 }
 #details h3, #details h4, #details h5, #details h6 {
-  color: #494949;
+  /*color: #494949;*/
+  color: #4f755e;
+  margin: 0;
 }
-#details tr {
+
+table {
+  width: 100%;
+}
+tr {
     height: 15em;
 }
 td {
   text-align: left;
   vertical-align: top;
 }
-#pertable td:nth-child(1) {
-  width: 50%; 
-}
+
 #protable td:nth-child(1) {
   width: 30%;
 }
@@ -155,6 +170,14 @@ td {
 #protable td:nth-child(3) {
   width: 50%;
 }
+
+#pertable td {
+  width: 50%; 
+}
+#pertable td:nth-child(1) {
+  text-align: center;
+}
+
 td img {
     max-height: 10em;
     max-width: 10em;
@@ -162,7 +185,7 @@ td img {
 
 footer {
   background: #fff;
-  height: 30px;
+  height: 2em;
 }
 footer a {
   font-family: 'Droid Sans', sans-serif;
@@ -184,17 +207,42 @@ footer p {
     width: auto;
     margin: 0;
   }
-  #details h1 {
+  #details h1 , #title_text h1 , #intro h1 , h1 {
     font-size: 24px;
   }
-  #details h2 {
+  #details h2 , #title_text h2 , #intro h2 , h2 {
     font-size: 16px;
   }
-}
-
-@media print, screen and (max-width: 43em) {
+  #details h3 , h3 {
+    font-size: 14px;
+  }
+  #details h4 , h4 {
+    font-size: 12px;
+  }
   .hero {
     max-height:100%;
     max-width:none;
+  }
+  tr {
+    width: 100%;
+  }
+  td {
+    display: block;
+    min-width: 100%;
+  }
+  td p {
+    padding-left: 1em;
+  }
+  td h3 {
+    text-align: center;
+  }
+  td:nth-child(1) {
+    text-align: center;
+  }
+}
+
+@media print, screen and (max-width: 25em) {
+  footer {
+    height: 4em;
   }
 }
