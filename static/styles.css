@@ -42,6 +42,7 @@ body {
 }
 
 #intro {
+  display: block;
   padding-top: 5em;
 }
 #intro h1 , #intro h2 {
