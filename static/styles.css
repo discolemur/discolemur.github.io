@@ -45,9 +45,14 @@ body {
   display: block;
   padding-top: 5em;
 }
-#intro h1 , #intro h2 {
+#intro_name h1 , #intro_name h2 {
   margin: 0;
   line-height: 2;
+}
+#intro_name {
+  min-height: 30%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 #title_text {
@@ -116,6 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 h1, h2 {
   line-height: 2;
+  color: #393939;
 }
 
 #section {
@@ -160,6 +166,9 @@ td {
   text-align: left;
   vertical-align: top;
 }
+td img {
+    max-width: 10em;
+}
 
 #protable td:nth-child(1) {
   width: 30%;
@@ -168,6 +177,7 @@ td {
   width: 20%;
   text-align: center;
 }
+
 #protable td:nth-child(3) {
   width: 50%;
 }
@@ -179,10 +189,10 @@ td {
   text-align: center;
 }
 
-td img {
-    max-height: 10em;
-    max-width: 10em;
+#pertable td img {
+  padding-bottom: 1em;
 }
+
 
 footer {
   background: #fff;
