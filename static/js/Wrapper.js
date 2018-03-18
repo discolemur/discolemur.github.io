@@ -77,9 +77,33 @@ function SubIntro (props) {
 }
 
 function Professional (props) {
+  const items = proContent.map(elem=>ProfessionalItem(elem));
   return (
     h('div', {id: 'Professional'},
-      h('span', {className: 'BodyTitle'}, 'Professional Background')
+      h('span', {className: 'BodyTitle'}, 'Professional Background'),
+      items
+    )
+  )
+}
+
+function ProfessionalItem (props) {
+  const {iconSrc, timeStr, title, subtitle, subsubtitle, description, ref} = props;
+  // TODO handle ref
+  return (
+    h('div', {className: 'ProItem'},
+      h('div', {className: "ProIcon"},
+        // TODO: add a default icon
+        iconSrc ? h('img', {src: iconSrc}) : null
+      ),
+      h('div', {className: 'ProTimeframe'},
+        h('span', null, timeStr)
+      ),
+      h('div', {className: 'ProText'},
+        h('span', {id: 'title'}, title),
+        h('span', {id: 'subtitle'}, subtitle),
+        h('span', {id: 'subsubtitle'}, subsubtitle),
+        h('span', {id: 'description'}, description),
+      )
     )
   )
 }
@@ -87,7 +111,19 @@ function Professional (props) {
 function Personal (props) {
   return (
     h('div', {id: 'Personal'},
-      h('span', {className: 'BodyTitle'}, 'About Me')
+      h('span', {className: 'BodyTitle'}, 'About Me'),
+      h('div', {id: 'PersonalContent'},
+        h('div', {id: "PersonalPhoto"},
+          h('img', {src:"/static/img/sitting.jpg"})
+        ),
+        h('div', {id: 'PersonalParagraph'},
+          h('span', null, 'Yeah, I know this is the most important part of my website to get right. Someday I will write a paragraph about myself. Until then, I\'ll keep working on my projects.'),
+        ),
+        h('div', {id: 'PersonalLinks'},
+          h('a', {href:"http://github.com/discolemur"}, 'Nick Jensen on GitHub'),
+          h('a', {href:"http://www.linkedin.com/in/nick-jensen-92261413a"}, 'Nick Jensen on LinkedIn')
+        )
+      )
     )
   )
 }
@@ -104,7 +140,6 @@ render(h(Wrapper), document.getElementById('Main'));
 
 /*
 
-        <div id=details>
 <h1><a id="professional" class="anchor" href="#professional" aria-hidden="true"><span class="octicon octicon-link"></span></a>Professional Background</h1>
 <table id="protable">
   <tr>
@@ -168,51 +203,5 @@ render(h(Wrapper), document.getElementById('Main'));
       <p>Honored Student of the Biology Department</p>
     </td>
   </tr>
-  <tr>
-    <td>
-      <img src="/static/dragonfly.png" />
-    </td>
-    <td>
-      <h4>2014 &#8211 2015</h4>
-    </td>
-    <td>
-      <h3>Research Assistant</h3>
-      <h4>Brigham Young University</h4>
-      <p><a href="http://bybeelab.byu.edu/">Dr. Seth Bybee's Lab</a></p>
-      <p>Phylogeny construction from NGS data, comparing methods for phylogeny construction, identifying false orthologs among putative homolog clusters.</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="/static/c-line.svg" />
-    </td>
-    <td>
-      <h4>2014</h4>
-    </td>
-    <td>
-      <h3>Teacher's Assistant</h3>
-      <h5>CS 235</h5>
-      <h5>Brigham Young University</h5>
-      <p>Taught students to write, test, and debug C++ code.</p>
-    </td>
-  </tr>
-</table>
-<h1><a id="personal" class="anchor" href="#personal" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Me</h1>
-<table id="pertable">
-  <tr>
-    <td>
-        <img src="/static/sitting.jpg" />
-    </td>
-    <td>
-        <p>Yeah, I know this is the most important part of my website to get right. Someday I will write a paragraph about myself. Until then, I'll keep working on my projects.</p>
-    </td>
-    <td>
-      <p><a href="http://github.com/discolemur">Nick Jensen on GitHub</a></p>
-      <p><a href="http://www.linkedin.com/in/nick-jensen-92261413a">Nick Jensen on LinkedIn</a></p>
-    </td>
-  </tr>
-</table>
-      </details>
-    </section>
-        </div>
+
 */
