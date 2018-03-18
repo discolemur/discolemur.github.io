@@ -1,0 +1,96 @@
+#intro {
+  /* margin-top: 2.8rem; */
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+#Hero {
+  position:fixed;
+  max-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+}
+#HeroText {
+  color: white;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#HeroText #Title {
+  font-size: 50px;
+  margin-bottom: 1.4rem;
+}
+#HeroText #Subtitle {
+  font-size: 24px;
+}
+
+#SubIntro {
+  max-height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  text-align: center;
+  padding-top: 5em;
+}
+#SubIntro #Title {
+  color: #393939;
+  font-size: 32px;
+  font-weight: bold;
+}
+#SubIntro #Subtitle {
+  display: flex;
+  justify-content: center;
+  color: #393939;
+  font-size: 24px;
+  font-weight: bold;
+}
+#SubIntro #Subtitle #item {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+#SubIntro img {
+  max-width: 120px;
+}
+
+#MePhoto {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+}
+#MePhoto img {
+  width: 400px;
+  max-width: 80%;
+  border-radius: 3.125em;
+  height: auto;
+  margin-top: 5em;
+}
+
+.BodyTitle {
+  font-size: 50px;
+}
+
+#Professional {
+  width: 100%;
+  padding-top: 5em;
+  text-align: center;
+  background-color: white;
+}
+
+#Personal {
+  width: 100%;
+  padding-top: 5em;
+  text-align: center;
+  background-color: white;
+}

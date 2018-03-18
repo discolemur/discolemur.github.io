@@ -1,0 +1,49 @@
+#Header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+#Bar {
+  width: 100%;
+  height: 2.8rem;
+  display: flex;
+  border-bottom: 0.063em solid #ccc;
+  box-shadow: 0 0 0.125em rgba(0,0,0,.4);
+  background: #fff;
+
+  font-weight: normal;
+  font-size: 20px;
+  font-family: 'Droid Sans', sans-serif;
+  font-variant: small-caps;
+  line-height: 1.2;
+  justify-content: center;
+}
+
+#Bar .item {
+  text-align: center;
+  font-size: 1.3rem;
+  margin: auto;
+}
+#Header a , #Header a:link , #Header a:visited {
+  color: #222;
+  text-decoration: none;
+}
+#Header a:hover {
+  color: #555;
+}
+#Header a:active {
+  color: #999;
+}
+
+#Footer {
+  background: #fff;
+  height: 2em;
+  width: 100%;
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+#Footer a , #Footer p {
+  font-family: 'Droid Sans', sans-serif;
+  margin: 0;
+}
