@@ -37,7 +37,7 @@ function Header (props) {
 function Intro (props) {
   return (
     h('div', {id:'intro'},
-      h('img', {src: '/static/img/heroBackground.jpg', id:'Hero'}),
+      h('img', {src: '/static/img/eclipse.jpg', id:'Hero'}),
       h('div', {id: "HeroText"},
         h('div', {id:'Title'}, 'NICK JENSEN'),
         h('div', {id:'Subtitle'}, 'professional website')
@@ -65,11 +65,12 @@ function SubIntro (props) {
         ),
         h('div', {className: "item"},
           h('span', null, "Researcher"),
-          h('img', {src: '/static/img/python.svg'})
+          //h('img', {src: '/static/img/DNA-Helix-Variation-2.svg'})
+          h('img', {src: '/static/img/beaker.png'})
         ),
         h('div', {className: "item"},
           h('span', null, "Chainmail Artist"),
-          h('img', {src: '/static/img/python.svg'})
+          h('img', {src: '/static/img/dragonscaleSquare.png'})
         )
       )
     )
@@ -120,8 +121,15 @@ function Personal (props) {
           h('span', null, 'Yeah, I know this is the most important part of my website to get right. Someday I will write a paragraph about myself. Until then, I\'ll keep working on my projects.'),
         ),
         h('div', {id: 'PersonalLinks'},
-          h('a', {href:"http://github.com/discolemur"}, 'Nick Jensen on GitHub'),
-          h('a', {href:"http://www.linkedin.com/in/nick-jensen-92261413a"}, 'Nick Jensen on LinkedIn')
+          h('a', {href:"http://github.com/discolemur"},
+            h('span', null, 'See my work'),
+            h('img', {src: '/static/img/GitHub-Mark-64px.png'})
+          ),
+          h('div', {id:"github-badge"}),
+          h('a', {href:"http://www.linkedin.com/in/nick-jensen-92261413a"},
+            h('span', null, 'View my profile'),
+            h('img', {src: "/static/img/In-2C-41px-R.png"})
+          )
         )
       )
     )
@@ -131,77 +139,15 @@ function Personal (props) {
 function Footer (props) {
   return (
     h('div', {id:'Footer'},
-      h('p', null, '© 2018 Nick Jensen — Hosted on GitHub Pages')
+      h('p', null, '© 2018 Nick Jensen — Hosted on GitHub Pages'),
+      h('div', null, 
+        h('span', {id:'credits'},'Icon made from ',
+          h('a', {href:"http://www.onlinewebfonts.com/icon"}, 'Icon Fonts'),
+          h('span', null, ' (the flask in the intro section) is licensed by CC BY 3.0')
+        )
+      )
     )
   )
 }
 
 render(h(Wrapper), document.getElementById('Main'));
-
-/*
-
-<h1><a id="professional" class="anchor" href="#professional" aria-hidden="true"><span class="octicon octicon-link"></span></a>Professional Background</h1>
-<table id="protable">
-  <tr>
-    <td>
-      <img src="/static/nodejs-original.svg" />
-    </td>
-    <td>
-      <h4>Present</h4>
-    </td>
-    <td>
-      <h3>Server-Side App Developer</h3>
-      <h4>Kinwaretech</h4>
-      <p>We created a solution to a prevalent social issue.</p>
-      <p>I developed most of the server, including noSQL database access methods.</p>
-      <p>I quickly learned NodeJs on the job.</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="/static/python.svg" />
-    </td>
-    <td>
-      <h4>2017</h4>
-    </td>
-    <td>
-      <h3>Freelance Python Consultant</h3>
-      <p>MQTT communications for TinkerBoard</p>
-      <p>Applied Tensorflow machine learning</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="/static/moroni_on_the_tyne.png" />
-    </td>
-    <td>
-      <h4>2015 &#8211 2017</h4>
-    </td>
-    <td>
-      <h3>Volunteer Missionary</h3>
-      <h4>The Church of Jesus Christ of Latter-day Saints</h4>
-      <p> </p>
-      <h5>Newcastle Upon Tyne, England</h5>
-      <p>I helped people live happier and more purposefully.</p>
-      <p>I also learned to speak Mandarin Chinese.</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="/static/BYU_medallion.svg" />
-    </td>
-    <td>
-      <h4>2011 &#8211 2015</h4>
-    </td>
-    <td>
-      <h3>Bachelor of Science: Bioinformatics</h3>
-      <h4>Brigham Young University</h4>
-      <p> </p>
-      <h5>Minors: Mathematics and Computer Science</h5>
-      <p> </p>
-      <p>Magna Cum Laude</p>
-      <p>Honored Student of the Biology Department</p>
-    </td>
-  </tr>
-
-*/

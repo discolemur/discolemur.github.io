@@ -13,6 +13,8 @@
   margin: 0;
   padding: 0;
   z-index: -1;
+  background-color: black;
+  object-fit: contain;
 }
 #HeroText {
   color: white;
@@ -43,8 +45,8 @@
   padding-top: 5em;
 }
 #SubIntro #Title {
-  color: #393939;
-  font-size: 32px;
+  color: #222;
+  font-size: 46px;
   font-weight: bold;
 }
 #SubIntro #Subtitle {
@@ -61,6 +63,10 @@
 
 #SubIntro img {
   max-width: 120px;
+  max-height: 120px;
+  display: block;
+  margin: auto;
+  border-radius: 0.5rem;
 }
 
 #MePhoto {
@@ -187,17 +193,41 @@
   flex-direction: column;
   justify-content: space-around;
 }
-#PersonalLinks a {
+#PersonalLinks img {
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  padding: 3px;
+}
+#PersonalLinks a , #PersonalLinks a:link , #PersonalLinks a:visited , #PersonalLinks a:active {
   text-decoration: none;
+  color: #555;
+}
+#PersonalLinks a:hover {
+  color: #999;
 }
 
-@media print, screen and (max-width: 50em) {
-  #SubIntro #Subtitle .item {
-    font-size: 16px;
+
+@media print, screen and (max-width: 35em) {
+  #SubIntro {
+    max-height: 100%;
+  }
+  #SubIntro #Subtitle {
+    flex-direction: column;
   }
   #SubIntro img {
     max-width: 90px;
   }
+  #SubIntro #Subtitle .item {
+    padding-top: 0.5rem;
+  }
+  #SubIntro #Title {
+    font-size: 32px;
+  }
+}
+
+@media print, screen and (max-width: 50em) {
+  
   #Professional , .ProItem {
     display: inline-block;
   } 
@@ -213,6 +243,7 @@
   }
   #PersonalLinks {
     flex-direction: row;
+    margin-top: 1rem;
   }
   #PersonalParagraph {
     padding-top: 0.8rem;
