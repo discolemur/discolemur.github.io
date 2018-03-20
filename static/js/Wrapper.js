@@ -59,15 +59,15 @@ function SubIntro (props) {
     h('div', {id: "SubIntro"},
       h('div', {id: "Title"}, "I\'m a creator"),
       h('div', {id: "Subtitle"},
-        h('div', {id: "item"},
+        h('div', {className: "item"},
           h('span', null, "Developer"),
           h('img', {src: '/static/img/python.svg'})
         ),
-        h('div', {id: "item"},
+        h('div', {className: "item"},
           h('span', null, "Researcher"),
           h('img', {src: '/static/img/python.svg'})
         ),
-        h('div', {id: "item"},
+        h('div', {className: "item"},
           h('span', null, "Chainmail Artist"),
           h('img', {src: '/static/img/python.svg'})
         )

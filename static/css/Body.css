@@ -54,7 +54,7 @@
   font-size: 24px;
   font-weight: bold;
 }
-#SubIntro #Subtitle #item {
+#SubIntro #Subtitle .item {
   text-align: center;
   padding-top: 2rem;
 }
@@ -79,6 +79,7 @@
 .BodyTitle {
   font-size: 50px;
 }
+
 
 #Professional {
   width: 100%;
@@ -148,6 +149,7 @@
   line-height: 1.5;
 }
 
+
 #Personal {
   width: 100%;
   padding-top: 5em;
@@ -176,6 +178,7 @@
   font-size: 16px;
   text-align: left;
   font-family: 'Martel', serif;
+  line-height: 1.5;
 }
 #PersonalLinks {
   width: 100%;
@@ -186,4 +189,33 @@
 }
 #PersonalLinks a {
   text-decoration: none;
+}
+
+@media print, screen and (max-width: 50em) {
+  #SubIntro #Subtitle .item {
+    font-size: 16px;
+  }
+  #SubIntro img {
+    max-width: 90px;
+  }
+  #Professional , .ProItem {
+    display: inline-block;
+  } 
+  .ProText #title {
+    text-align: center;
+    padding-bottom: 0.8rem;
+  }
+  .ProIcon {
+    padding-bottom: 0.8rem;
+  }
+  #PersonalContent , #PersonalPhoto , #PersonalParagraph  {
+    display: inline-block;
+  }
+  #PersonalLinks {
+    flex-direction: row;
+  }
+  #PersonalParagraph {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
 }
