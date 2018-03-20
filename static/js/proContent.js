@@ -1,6 +1,6 @@
 const proContent = [
   {
-    iconSrc: '/static/img/nodejs-original.svg',
+    iconSrc: '/static/img/kinware.png',
     timeStr: '2017 – Present',
     title: 'App Developer',
     subtitle: 'Kinwaretech',
