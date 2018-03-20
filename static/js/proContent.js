@@ -6,7 +6,7 @@ const proContent = [
     subtitle: 'Kinwaretech',
     subsubtitle: null,
     description: 'We created a solution to a prevalent social issue.\nI developed most of the server, including noSQL database access methods.\nI also contributed significantly to the client app.\nI quickly learned NodeJs on the job.',
-    ref: ''
+    ref: 'http://kinwarekeeper.com/'
   },
   {
     iconSrc: '/static/img/python.svg',
@@ -15,7 +15,7 @@ const proContent = [
     subtitle: null, 
     subsubtitle: null,
     description: 'MQTT communications for TinkerBoard\nApplied Tensorflow machine learning',
-    ref: ''
+    ref: null
   },
   {
     iconSrc: '/static/img/moroni_on_the_tyne.png',
@@ -24,7 +24,7 @@ const proContent = [
     subtitle: 'The Church of Jesus Christ of Latter-day Saints',
     subsubtitle: 'Newcastle Upon Tyne, England',
     description: 'I helped people live more happily and purposefully.\nI also learned to speak Mandarin Chinese and helped international students find friends.',
-    ref: ''
+    ref: 'http://mormon.org' 
   },
   {
     iconSrc: '/static/img/BYU_medallion.svg',
@@ -33,7 +33,7 @@ const proContent = [
     subtitle: 'Brigham Young University',
     subsubtitle: 'Minors: Mathematics and Computer Science',
     description: 'Magna Cum Laude\nHonored Student of the Biology Department',
-    ref: ''
+    ref: 'http://byu.edu'
   },
   {
     iconSrc: '/static/img/dragonfly.png',

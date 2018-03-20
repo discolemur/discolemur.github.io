@@ -12,6 +12,7 @@ class Wrapper extends Component {
         h(MePhoto, null),
         h(SubIntro, null),
         h(Professional, null),
+        // TODO this is where I really want the eclipse picture to slide through.
         h(Personal, null),
         h(Footer, null)
       )
@@ -89,21 +90,26 @@ function Professional (props) {
 
 function ProfessionalItem (props) {
   const {iconSrc, timeStr, title, subtitle, subsubtitle, description, ref} = props;
-  // TODO handle ref
+  const subtitleDOM = h('span', {id: 'subtitle'}, subtitle);
+  const subtitleLinkDOM = ref && subtitle ? h('a', {href: ref, id: 'subtitle'}, subtitle) : subtitleDOM;
+  const titleDOM = h('span', {id: 'title'}, title);
+  const titleLinkDOM = h('a', {href: ref, id: 'title'}, title);
+  const descriptionDOM = description.split('\n').map(part=>{
+    return h('span', {id: 'description'}, part)
+  })
   return (
     h('div', {className: 'ProItem'},
       h('div', {className: "ProIcon"},
-        // TODO: add a default icon
         iconSrc ? h('img', {src: iconSrc}) : null
       ),
       h('div', {className: 'ProTimeframe'},
         h('span', null, timeStr)
       ),
       h('div', {className: 'ProText'},
-        h('span', {id: 'title'}, title),
-        h('span', {id: 'subtitle'}, subtitle),
-        h('span', {id: 'subsubtitle'}, subsubtitle),
-        h('span', {id: 'description'}, description),
+        subtitle ? titleDOM : titleLinkDOM,
+        subtitle ? subtitleLinkDOM : null,
+        subsubtitle ? h('span', {id: 'subsubtitle'}, subsubtitle) : null,
+        descriptionDOM
       )
     )
   )
