@@ -24,11 +24,13 @@
   left: 0;
   width: 100%;
   text-align: center;
+  pointer-events: none;
 }
 .Scroll3D img {
   display: block;
   border-radius: 0.5rem;
   margin: auto;
+  pointer-events: auto;
 }
 .Scroll3D .title {
   text-align: center;

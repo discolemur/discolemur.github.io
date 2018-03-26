@@ -2,6 +2,7 @@
 
 const _LEFT = true;
 const _RIGHT = false;
+const _ANIMATE_RATE = 200;
 
 class Scroll3D extends Component {
   constructor(props) {
@@ -14,9 +15,9 @@ class Scroll3D extends Component {
     const total = props.items.length;
     this.step = 2 / total;
     let progress = 0;
-    this.items = [];
+    this.state.items = [];
     for (let item of props.items) {
-      this.items.push({
+      this.state.items.push({
         title: item.title,
         img: item.img,
         progress: progress
@@ -28,6 +29,22 @@ class Scroll3D extends Component {
     }
     this.imgWidthPercent = 70;
     this.state.scrolling = false;
+    this.direction = _RIGHT;
+    this.directions = [];
+  }
+  _addRecentDirection(dir) {
+    if (this.directions.length == 3) {
+      this.directions.splice(0,1);
+    }
+    this.directions.push(dir == _LEFT ? 1 : 0);
+    let sum = 0;
+    this.directions.forEach(val=>sum+=val)
+    sum /= this.directions.length;
+    if (sum > 0.5) {
+      this.direction = _LEFT;
+    } else if (sum < 0.5) {
+      this.direction = _RIGHT;
+    }
   }
   _getMinAbsoluteProgress(items) {
     let least = { progress: 1 };
@@ -50,8 +67,8 @@ class Scroll3D extends Component {
     }
     return 100;
   }
-  _itemsToDom(props) {
-    return this.items.map(item =>{
+  _itemsToDom(items) {
+    return items.map(item =>{
       let xOffset = this._progressToXOffset(item.progress);
       let left = xOffset > 0 ? xOffset : 0;
       let width = xOffset > 0 ? 100 - left : 100 + xOffset;
@@ -66,6 +83,7 @@ class Scroll3D extends Component {
         },
         h('img', {
           src: item.img,
+          onClick: (e)=>{e.preventDefault(); e.stopPropagation(); this._evenOut(-1 * item.progress, items);},
           style: `
             max-height: ${this.imgWidthPercent}%;
             max-width: ${this.imgWidthPercent}%;
@@ -74,8 +92,8 @@ class Scroll3D extends Component {
       )
     });
   }
-  _updateProgress(diff) {
-    this.items = this.items.map(item=>{
+  _updateProgress(diff, items) {
+    items = items.map(item=>{
       item.progress = item.progress + (diff / 100);
       if (item.progress > 1) {
         item.progress = -1 + (item.progress - 1);
@@ -86,50 +104,63 @@ class Scroll3D extends Component {
       return item;
     })
   }
-  _evenOut(amount) {
-    this.items = this.items.map(item=>{
-      item.progress = item.progress + amount;
-      if (item.progress > 1) {
-        item.progress = -1 + (item.progress - 1);
-      }
-      if (item.progress < -1) {
-        item.progress = 1 + (item.progress + 1);
-      }
-      return item;
-    })
+  _evenOut(distance, items) {
+    const amount = distance / _ANIMATE_RATE;
+    const moveABit = () => {
+      items = items.map(item=>{
+        item.progress = item.progress + amount;
+        if (item.progress > 1) {
+          item.progress = -1 + (item.progress - 1);
+        }
+        if (item.progress < -1) {
+          item.progress = 1 + (item.progress + 1);
+        }
+        return item;
+      })
+      this.setState({items: items})
+    }
+    for (let i = _ANIMATE_RATE; i > 0; i--) {
+      window.setTimeout(moveABit,1);
+    }
   }
-  // TODO handle tap (go one to the left, or one to the right.)
   mouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
     this.setState({scrolling: true, prevX: e.clientX });
   }
-  // TODO this aught to animate back to nearest item. It isn't animating right now.
-  mouseUp(e) {
+  mouseUp(e, items) {
     e.preventDefault();
     e.stopPropagation();
     this.setState({scrolling: false});
-    let closest = this._getMinAbsoluteProgress(this.items);
-    const rate = 500;
-    const amount = -1 * (closest.progress / rate);
-    for (let i = rate; i > 0; i--) {
-      this._evenOut(amount);
-      this.setState({remaining: i})
+    let closest =  this._getMinAbsoluteProgress(items);
+    let closestLeft = this._getMinAbsoluteProgress(items.filter(item=>item.progress<=0));
+    let closestRight = this._getMinAbsoluteProgress(items.filter(item=>item.progress>=0));
+    const diff = Math.abs(Math.abs(closestLeft.progress) - Math.abs(closestRight.progress));
+    if (diff < (this.step * 0.7) ) {
+      if (this.direction == _LEFT) {
+        closest = closestRight;
+      } else {
+        closest = closestLeft;
+      }
     }
+    const amount = -1 * (closest.progress);
+    this._evenOut(amount, items);
   }
-  mouseMove(e, scrolling, prevX) {
+  mouseMove(e, scrolling, prevX, items) {
     e.preventDefault();
     e.stopPropagation();
     if (!scrolling) {
       return;
     }
     const diff = e.clientX - prevX;
-    this._updateProgress(diff);
+    if (diff < 0) this._addRecentDirection(_LEFT);
+    if (diff > 0) this._addRecentDirection(_RIGHT);
+    this._updateProgress(diff, items);
     this.setState({prevX: e.clientX});
   }
-  _getDisplayText() {
-    let itemRight = this._getMinAbsoluteProgress(this.items.filter(x => x.progress <= 0));
-    let itemLeft = this._getMinAbsoluteProgress(this.items.filter(x => x.progress >= 0));
+  _getDisplayText(items) {
+    let itemRight = this._getMinAbsoluteProgress(items.filter(x => x.progress <= 0));
+    let itemLeft = this._getMinAbsoluteProgress(items.filter(x => x.progress >= 0));
     let leftOpacity = 0;
     let rightOpacity = 0;
     if (Math.abs(itemRight.progress) < Math.abs(itemLeft.progress)) {
@@ -148,12 +179,20 @@ class Scroll3D extends Component {
       rightTitle: itemRight.title
     }
   }
+  // TODO handle evening out here using state instead of how we're doing it.
   render(props, state) {
-    
-    const {leftOpacity, rightOpacity, leftTitle, rightTitle} = this._getDisplayText();
+    const {leftOpacity, rightOpacity, leftTitle, rightTitle} = this._getDisplayText(state.items);
     return (
-      h('div', { className: "Scroll3D", onMouseDown:this.mouseDown, onMouseUp:this.mouseUp, onMouseMove:(e)=>this.mouseMove(e, state.scrolling, state.prevX) },
-        this._itemsToDom(),
+      h('div', {
+        className: "Scroll3D",
+        onMouseDown:this.mouseDown,
+        onMouseUp:(e)=>this.mouseUp(e, state.items),
+        onMouseMove:(e)=>this.mouseMove(e, state.scrolling, state.prevX, state.items),
+        onDragStart:this.mouseDown,
+        onDrag:(e)=>this.mouseMove(e, state.scrolling, state.prevX, state.items),
+        onDragEnd:(e)=>this.mouseUp(e, state.items)
+      },
+        this._itemsToDom(state.items),
         h('span', { className: 'title', style: `opacity: ${leftOpacity};` }, leftTitle),
         h('span', { className: 'title', style: `opacity: ${rightOpacity};` }, rightTitle)
       )
