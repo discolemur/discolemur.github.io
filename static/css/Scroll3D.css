@@ -10,6 +10,12 @@
   width: 20rem;
   max-width: 80vw;
   z-index: 1;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .Scroll3D .item {
   position: absolute;
@@ -33,11 +39,7 @@
 }
 
 @media print, screen and (max-width: 35em) {
-  .Scroll3D {
-  }
   .Scroll3D img {
     max-width: 90px;
-  }
-  .Scroll3D .item {
   }
 }
