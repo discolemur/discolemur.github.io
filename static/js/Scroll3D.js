@@ -10,8 +10,9 @@ class Scroll3D extends Component {
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
+    this._getDisplayText = this._getDisplayText.bind(this);
     const total = props.items.length;
-    const step = 2 / total;
+    this.step = 2 / total;
     let progress = 0;
     this.items = [];
     for (let item of props.items) {
@@ -20,7 +21,7 @@ class Scroll3D extends Component {
         img: item.img,
         progress: progress
       });
-      progress += step;
+      progress += this.step;
       if (progress > 1) {
         progress = -1 + (progress - 1);
       }
@@ -126,28 +127,35 @@ class Scroll3D extends Component {
     this._updateProgress(diff);
     this.setState({prevX: e.clientX});
   }
-  render(props, state) {
+  _getDisplayText() {
     let itemRight = this._getMinAbsoluteProgress(this.items.filter(x => x.progress <= 0));
     let itemLeft = this._getMinAbsoluteProgress(this.items.filter(x => x.progress >= 0));
-    let TITLE = null;
-    if (itemRight == itemLeft) {
-      TITLE = itemRight.title;
-    }
     let leftOpacity = 0;
     let rightOpacity = 0;
     if (Math.abs(itemRight.progress) < Math.abs(itemLeft.progress)) {
       rightOpacity = 1 - Math.abs(itemRight.progress);
-      leftOpacity = 1 - rightOpacity;
+      leftOpacity = 1 - Math.abs(itemLeft.progress);
     } else {
       leftOpacity = 1 - Math.abs(itemLeft.progress);
-      rightOpacity = 1 - leftOpacity;
+      rightOpacity = 1 - Math.abs(itemRight.progress);
     }
+    leftOpacity -= (this.step * (1-leftOpacity));
+    rightOpacity -= (this.step * (1-rightOpacity));
+    return {
+      leftOpacity: leftOpacity,
+      rightOpacity: rightOpacity,
+      leftTitle: itemLeft.title,
+      rightTitle: itemRight.title
+    }
+  }
+  render(props, state) {
+    
+    const {leftOpacity, rightOpacity, leftTitle, rightTitle} = this._getDisplayText();
     return (
       h('div', { className: "Scroll3D", onMouseDown:this.mouseDown, onMouseUp:this.mouseUp, onMouseMove:(e)=>this.mouseMove(e, state.scrolling, state.prevX) },
         this._itemsToDom(),
-        TITLE ? h('span', { className: 'title', style: 'opacity: 1;' }, TITLE)
-          : h('span', { className: 'title', style: `opacity: ${leftOpacity};` }, itemLeft.title),
-        TITLE ? null : h('span', { className: 'title', style: `opacity: ${rightOpacity};` }, itemRight.title)
+        h('span', { className: 'title', style: `opacity: ${leftOpacity};` }, leftTitle),
+        h('span', { className: 'title', style: `opacity: ${rightOpacity};` }, rightTitle)
       )
     )
   }
