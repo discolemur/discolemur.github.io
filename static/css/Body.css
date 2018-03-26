@@ -49,25 +49,6 @@
   font-size: 46px;
   font-weight: bold;
 }
-#SubIntro #Subtitle {
-  display: flex;
-  justify-content: space-evenly;
-  color: #393939;
-  font-size: 24px;
-  font-weight: bold;
-}
-#SubIntro #Subtitle .item {
-  text-align: center;
-  padding-top: 2rem;
-}
-
-#SubIntro img {
-  max-width: 120px;
-  max-height: 120px;
-  display: block;
-  margin: auto;
-  border-radius: 0.5rem;
-}
 
 #MePhoto {
   width: 100%;
@@ -211,15 +192,6 @@
 @media print, screen and (max-width: 35em) {
   #SubIntro {
     max-height: 100%;
-  }
-  #SubIntro #Subtitle {
-    flex-direction: column;
-  }
-  #SubIntro img {
-    max-width: 90px;
-  }
-  #SubIntro #Subtitle .item {
-    padding-top: 0.5rem;
   }
   #SubIntro #Title {
     font-size: 32px;

@@ -59,21 +59,7 @@ function SubIntro (props) {
   return (
     h('div', {id: "SubIntro"},
       h('div', {id: "Title"}, "I\'m a creator"),
-      h('div', {id: "Subtitle"},
-        h('div', {className: "item"},
-          h('span', null, "Developer"),
-          h('img', {src: '/static/img/python.svg'})
-        ),
-        h('div', {className: "item"},
-          h('span', null, "Researcher"),
-          //h('img', {src: '/static/img/DNA-Helix-Variation-2.svg'})
-          h('img', {src: '/static/img/beaker.png'})
-        ),
-        h('div', {className: "item"},
-          h('span', null, "Chainmail Artist"),
-          h('img', {src: '/static/img/dragonscaleSquare.png'})
-        )
-      )
+      h(Scroll3D, {items: personalScrollItems})
     )
   )
 }
