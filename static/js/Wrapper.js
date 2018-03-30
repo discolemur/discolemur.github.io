@@ -75,7 +75,13 @@ function Professional (props) {
 }
 
 function ProfessionalItem (props) {
-  const {iconSrc, timeStr, title, subtitle, subsubtitle, description, ref} = props;
+  const iconSrc = props.iconSrc;
+  const timeStr = props.timeStr;
+  const title = props.title;
+  const subtitle = props.subtitle;
+  const subsubtitle = props.subsubtitle;
+  const description = props.description;
+  const ref = props.ref;
   const subtitleDOM = h('span', {id: 'subtitle'}, subtitle);
   const subtitleLinkDOM = ref && subtitle ? h('a', {href: ref, id: 'subtitle'}, subtitle) : subtitleDOM;
   const titleDOM = h('span', {id: 'title'}, title);

@@ -1,3 +1,4 @@
+"use strict";
 const proContent = [
   {
     iconSrc: '/static/img/kinware.png',

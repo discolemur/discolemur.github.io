@@ -1,3 +1,5 @@
+"use strict";
+
 const personalScrollItems = [
     {
         title: 'Developer',
