@@ -3,7 +3,11 @@
 const _LEFT = true;
 const _RIGHT = false;
 const _ANIMATE_RATE = 200;
-const SCROLL_THRESHOLD = 0.01;
+// Between 0 and 1 (percent distance halfway around circle)
+// Smaller values make it more likely to be considered scrolling
+const SCROLL_THRESHOLD = 0.05;
+// Between 0 and 1 (percent distance from one item to next)
+// Smaller values make it bounce back more.
 const BOUNCE_BACK_THRESHOLD = 0.7;
 
 class Scroll3D extends Component {
@@ -30,7 +34,7 @@ class Scroll3D extends Component {
       }
     }
     this.imgWidthPercent = 70;
-    this.state.scrolling = false;
+    this.setState({ scrolling: false });
     this.direction = _RIGHT;
     this.directions = [];
   }
@@ -91,6 +95,7 @@ class Scroll3D extends Component {
         h('img', {
           src: item.img,
           onMouseUp: scrolling ? null : (e) => { e.preventDefault(); e.stopPropagation(); this._GoToOne(item); },
+          onTouchEnd: scrolling ? null : (e) => { e.preventDefault(); e.stopPropagation(); this._GoToOne(item); },
           style: `
             max-height: ${this.imgWidthPercent}%;
             max-width: ${this.imgWidthPercent}%;
@@ -161,7 +166,7 @@ class Scroll3D extends Component {
     if (diff < 0) this._addRecentDirection(_LEFT);
     if (diff > 0) this._addRecentDirection(_RIGHT);
     this._updateProgress(diff, items);
-    if (!scrolling && !items.some(item=>Math.abs(item.progress) < SCROLL_THRESHOLD)) {this.setState({scrolling: true});}
+    if (!scrolling && !items.some(item => Math.abs(item.progress) < SCROLL_THRESHOLD)) { this.setState({ scrolling: true }); }
     this.setState({ prevX: newX });
   }
   _getDisplayText(items) {
