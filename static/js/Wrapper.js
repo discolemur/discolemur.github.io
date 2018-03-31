@@ -4,21 +4,24 @@ class Wrapper extends Component {
   constructor(props) {
     super(props);
     this.handleScroll = this.handleScroll.bind(this);
+    this.setState({top: 0, height: 0});
   }
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll, true);
   };
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll, true);
   };
   handleScroll(event) {
-    console.log('the scroll things', event)
+    const currentTop = event.target.scrollTop;
+    const height = event.target.clientHeight;
+    this.setState({height: height, top: currentTop});
   };
   render(props, state) {
     return (
       h('div', {id:'Wrapper'},
         // Paralax Images
-        h(ParalaxImages, null),
+        h(ParalaxImages, {height: state.height, top: state.top}),
         h(Header, null),
         h(Intro, null),
           h(MePhoto, null),
@@ -34,10 +37,16 @@ class Wrapper extends Component {
 }
 
 function ParalaxImages (props) {
+  const height = props.height;
+  const top = props.top;
+  let useFirst = true;
+  if (top > height) {
+    useFirst = false;
+  }
   return (
     h('div', null,
-      h('img', {src: '/static/img/eclipse.jpg', id:'Hero', className: 'Paralax set'}),
-      h('img', {src: '/static/img/heroBackground.jpg', id:'Hero', className: 'Paralax unset'})
+      h('div', {id:'Hero', className: useFirst ? 'Paralax set' : 'Paralax unset'}),
+      h('div', {id:'AfterProfessional', className: useFirst ? 'Paralax unset' : 'Paralax set'})
     )
   )
 }

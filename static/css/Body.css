@@ -3,17 +3,31 @@
   width: 100%;
   display: inline-block;
 }
+.Paralax {
+  background-position: center;
+  background-repeat: no-repeat;
 
-#Hero {
-  position:fixed;
-  max-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
   overflow: hidden;
-  background-size: cover;
   margin: 0;
   padding: 0;
+}
+.Paralax.unset {
+  z-index: -2;
+}
+.Paralax.set {
+  z-index: -1;
+}
+#Hero {
+  background-image: url('/static/img/heroBackground.jpg');
+  background-size: cover;
+}
+#AfterProfessional {
+  background-image: url('/static/img/eclipse.jpg');
   background-color: black;
-  object-fit: contain;
+  background-size: contain;
 }
 #HeroText {
   color: white;
@@ -39,19 +53,6 @@
   position: relative;
 }
 
-.Paralax {
-  width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  position: absolute;
-}
-.Paralax.unset {
-  z-index: -2;
-}
-.Paralax.set {
-  z-index: -1;
-}
-
 #SubIntro {
   max-height: 50%;
   width: 100%;
@@ -66,6 +67,7 @@
   color: #222;
   font-size: 46px;
   font-weight: bold;
+  padding-bottom: 2rem;
 }
 
 #MePhoto {
@@ -173,6 +175,7 @@
   padding-top: 2em;
   padding-left: 10%;
   padding-right: 10%;
+  padding-bottom: 4em;
 }
 
 #PersonalPhoto {

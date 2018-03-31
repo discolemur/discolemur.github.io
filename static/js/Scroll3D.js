@@ -2,15 +2,14 @@
 
 const _LEFT = true;
 const _RIGHT = false;
-const _ANIMATE_RATE = 200;
+const _ANIMATE_STEPS= 20;
+const _ANIMATE_PAUSE = 10;
 // Between 0 and 1 (percent distance halfway around circle)
 // Smaller values make it more likely to be considered scrolling
-const SCROLL_THRESHOLD = 0.05;
+const SCROLL_THRESHOLD = 0.01;
 // Between 0 and 1 (percent distance from one item to next)
 // Smaller values make it bounce back more.
 const BOUNCE_BACK_THRESHOLD = 0.7;
-
-// TODO when you go past the first one, just even out when you let go. You don't need to GoTo the far left/right after that.
 
 class Scroll3D extends Component {
   constructor(props) {
@@ -119,8 +118,8 @@ class Scroll3D extends Component {
     })
   }
   _move(distance, items) {
-    const amount = distance / _ANIMATE_RATE;
-    const moveABit = () => {
+    const amount = distance / _ANIMATE_STEPS;
+    const moveABit = (actionCounter) => {
       items = items.map(item => {
         item.progress = item.progress + amount;
         if (item.progress > 1) {
@@ -131,11 +130,9 @@ class Scroll3D extends Component {
         }
         return item;
       })
-      this.setState({ items: items })
+      this.setState({ items: items, actionCounter: actionCounter - 1 })
     }
-    for (let i = _ANIMATE_RATE; i > 0; i--) {
-      window.setTimeout(moveABit, 1);
-    }
+    this.setState({ action:(actionCounter)=>window.setTimeout(()=>moveABit(actionCounter), _ANIMATE_PAUSE), actionCounter: _ANIMATE_STEPS})
   }
   _GoToOne(target) {
     this._move(-1 * target.progress, this.state.items)
@@ -149,9 +146,9 @@ class Scroll3D extends Component {
     this.setState({ scrolling: false, prevX: newX });
   }
   mouseUp(e, items, scrolling) {
+    e.preventDefault();
+    e.stopPropagation();
     if (scrolling) {
-      e.preventDefault();
-      e.stopPropagation();
       this._evenOut(items);
     }
     this.setState({ prevX: null, scrolling: false });
@@ -210,17 +207,20 @@ class Scroll3D extends Component {
     const rightOpacity = displayText.rightOpacity;
     const leftTitle = displayText.leftTitle;
     const rightTitle = displayText.rightTitle;
+    if (state.actionCounter > 0) {
+      state.action(state.actionCounter);
+    }
     return (
       h('div', {
         className: "Scroll3D",
         onMouseDown: this.mouseDown,
-        onMouseUp: (e) => this.mouseUp(e, state.items, state.scrolling),
-        onMouseMove: (e) => this.mouseMove(e, state.scrolling, state.prevX, state.items),
-        onMouseLeave: (e) => this.mouseUp(e, state.items, state.scrolling),
-        onTouchStart: this.mouseDown,
-        onTouchMove: (e) => this.mouseMove(e, state.scrolling, state.prevX, state.items),
-        onTouchEnd: (e) => this.mouseUp(e, state.items, state.scrolling),
-        onTouchCancel: (e) => this.mouseUp(e, state.items, state.scrolling)
+        onMouseUp: state.actionCounter ? null : (e) => this.mouseUp(e, state.items, state.scrolling),
+        onMouseMove: state.actionCounter ? null : (e) => this.mouseMove(e, state.scrolling, state.prevX, state.items),
+        onMouseLeave: state.actionCounter ? null : (e) => this.mouseUp(e, state.items, state.scrolling),
+        onTouchStart: state.actionCounter ? null : this.mouseDown,
+        onTouchMove: state.actionCounter ? null : (e) => this.mouseMove(e, state.scrolling, state.prevX, state.items),
+        onTouchEnd: state.actionCounter ? null : (e) => this.mouseUp(e, state.items, state.scrolling),
+        onTouchCancel: state.actionCounter ? null : (e) => this.mouseUp(e, state.items, state.scrolling)
       },
         this._itemsToDom(state.items, state.scrolling),
         h('span', { className: 'title', style: `opacity: ${leftOpacity};` }, leftTitle),
