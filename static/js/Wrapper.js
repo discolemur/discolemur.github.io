@@ -3,21 +3,43 @@
 class Wrapper extends Component {
   constructor(props) {
     super(props);
+    this.handleScroll = this.handleScroll.bind(this);
   }
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  };
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  };
+  handleScroll(event) {
+    console.log('the scroll things', event)
+  };
   render(props, state) {
     return (
       h('div', {id:'Wrapper'},
+        // Paralax Images
+        h(ParalaxImages, null),
         h(Header, null),
         h(Intro, null),
-        h(MePhoto, null),
-        h(SubIntro, null),
-        h(Professional, null),
-        // TODO this is where I really want the eclipse picture to slide through.
-        h(Personal, null),
-        h(Footer, null)
+          h(MePhoto, null),
+          h(SubIntro, null),
+          h(Professional, null),
+          // this is where I really want the eclipse picture to slide through.
+          h(Invisible, {height: '10rem', maxHeight: '40%'}),
+          h(Personal, null),
+          h(Footer, null)
       )
     )
   }
+}
+
+function ParalaxImages (props) {
+  return (
+    h('div', null,
+      h('img', {src: '/static/img/eclipse.jpg', id:'Hero', className: 'Paralax set'}),
+      h('img', {src: '/static/img/heroBackground.jpg', id:'Hero', className: 'Paralax unset'})
+    )
+  )
 }
 
 function Header (props) {
@@ -38,7 +60,6 @@ function Header (props) {
 function Intro (props) {
   return (
     h('div', {id:'intro'},
-      h('img', {src: '/static/img/eclipse.jpg', id:'Hero'}),
       h('div', {id: "HeroText"},
         h('div', {id:'Title'}, 'NICK JENSEN'),
         h('div', {id:'Subtitle'}, 'professional website')
@@ -105,6 +126,10 @@ function ProfessionalItem (props) {
       )
     )
   )
+}
+
+function Invisible(props) {
+  return h('div', {id: 'Invisible', style: `height: ${props.height}; max-height: ${props.maxHeight};`});
 }
 
 function Personal (props) {

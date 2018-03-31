@@ -38,7 +38,7 @@
 
 #Footer {
   background: #fff;
-  height: 2em;
+  min-height: 2em;
   width: 100%;
   text-align: center;
   padding-top: 1.5rem;

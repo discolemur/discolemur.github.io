@@ -12,7 +12,6 @@
   background-size: cover;
   margin: 0;
   padding: 0;
-  z-index: -1;
   background-color: black;
   object-fit: contain;
 }
@@ -32,6 +31,25 @@
 }
 #HeroText #Subtitle {
   font-size: 24px;
+}
+
+#MainContent {
+  background: white;
+  width: 100%;
+  position: relative;
+}
+
+.Paralax {
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+.Paralax.unset {
+  z-index: -2;
+}
+.Paralax.set {
+  z-index: -1;
 }
 
 #SubIntro {
@@ -75,6 +93,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  padding-bottom: 2em;
 }
 
 .ProItem {
@@ -136,10 +155,14 @@
   line-height: 1.5;
 }
 
+#Invisible {
+  display:block;
+  background: none;
+}
 
 #Personal {
+  padding-top: 2em;
   width: 100%;
-  padding-top: 5em;
   text-align: center;
   background-color: white;
 }

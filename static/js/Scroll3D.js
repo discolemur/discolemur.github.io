@@ -10,6 +10,8 @@ const SCROLL_THRESHOLD = 0.05;
 // Smaller values make it bounce back more.
 const BOUNCE_BACK_THRESHOLD = 0.7;
 
+// TODO when you go past the first one, just even out when you let go. You don't need to GoTo the far left/right after that.
+
 class Scroll3D extends Component {
   constructor(props) {
     super(props);
