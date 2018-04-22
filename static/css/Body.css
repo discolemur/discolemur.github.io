@@ -61,7 +61,7 @@
   flex-direction: column;
   background-color: white;
   text-align: center;
-  padding-top: 5em;
+  padding-top: 4rem;
 }
 #SubIntro #Title {
   color: #222;
@@ -78,9 +78,9 @@
 #MePhoto img {
   width: 400px;
   max-width: 80%;
-  border-radius: 3.125em;
+  border-radius: 3.125rem;
   height: auto;
-  margin-top: 5em;
+  margin-top: 4rem;
 }
 
 .BodyTitle {
@@ -90,18 +90,17 @@
 
 #Professional {
   width: 100%;
-  padding-top: 5em;
+  padding: 4rem 0;
   text-align: center;
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding-bottom: 2em;
 }
 
 .ProItem {
   display: flex;
   justify-content: space-around;
-  padding-top: 2em;
+  padding-top: 2rem;
   padding-left: 10%;
   padding-right: 10%;
 }
@@ -147,7 +146,7 @@
   font-size: 13.3px;
   color: #4f755e;
 }
-.ProText #description {
+.ProText .description {
   width: 100%;
   display: inline-block;
   font-size: 16px;
@@ -163,7 +162,7 @@
 }
 
 #Personal {
-  padding-top: 2em;
+  padding: 4rem 0;
   width: 100%;
   text-align: center;
   background-color: white;
@@ -172,10 +171,9 @@
 #PersonalContent {
   display: flex;
   justify-content: space-around;
-  padding-top: 2em;
+  padding-top: 2rem;
   padding-left: 10%;
   padding-right: 10%;
-  padding-bottom: 4em;
 }
 
 #PersonalPhoto {
@@ -184,6 +182,7 @@
 }
 #PersonalPhoto img {
   max-width: 160px;
+  border: 2px solid #AAA;
 }
 #PersonalParagraph {
   width: 100%;
@@ -214,17 +213,53 @@
   color: #999;
 }
 
-
-@media print, screen and (max-width: 35em) {
-  #SubIntro {
-    max-height: 100%;
-  }
-  #SubIntro #Title {
-    font-size: 32px;
-  }
+sup {
+  font-family: sans-serif;
 }
 
-@media print, screen and (max-width: 50em) {
+.clickable {
+  cursor: pointer;
+}
+a:hover sup , a:hover span {
+  text-decoration: underline;
+}
+
+.footnote {
+  position: absolute;
+  background-color: #FFF;
+  width: 26rem;
+  border: 3px solid #AAA;
+  right: 0.2rem;
+  top: 1.2rem;
+  z-index: 1;
+}
+
+.closeBtn {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  position: absolute;
+  right: 0.4rem;
+  font-family: sans-serif;
+  color: #AAA;
+}
+a:hover .closeBtn {
+  color: #444;
+  text-decoration: none;
+}
+.footnoteContainer {
+  display: inline;
+  position: relative;
+}
+.footnoteContent {
+  padding: 0.4rem;
+  padding-top: 1rem;
+  margin: 0;
+  font-size: 14px;
+}
+
+@media print, screen and (max-width: 50rem) {
   
   #Professional , .ProItem {
     display: inline-block;
@@ -246,5 +281,28 @@
   #PersonalParagraph {
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
+  }
+  .footnoteContainer {
+    position: sticky;
+  }
+  .footnote {
+    right: 0;
+    position: sticky;
+    width: 100%;
+  }
+}
+
+@media print, screen and (max-width: 35rem) {
+  #SubIntro {
+    max-height: 100%;
+  }
+  #SubIntro #Title, #HeroText #Title , .BodyTitle {
+    font-size: 32px;
+  }
+}
+
+@media print, screen and (max-width: 26rem) {
+  .footnote {
+    width: 10rem;
   }
 }
