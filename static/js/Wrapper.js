@@ -1,5 +1,7 @@
 "use strict";
 
+const pxPerRem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
 class Wrapper extends Component {
   constructor(props) {
     super(props);
@@ -120,13 +122,13 @@ function ProfessionalItem(props) {
   const descriptionDOM = [];
   let closeTriggers = [];
   function closeAll() {
-    closeTriggers.forEach(f=>f());
+    closeTriggers.forEach(f => f());
   }
   description.split('\n').map(part => {
     let lineDOM = [];
     part = part.split('[').forEach(subpart => {
       if (subpart.length > 1 && subpart[1] == ']') {
-        lineDOM.push(h(Footnote, { closeAll: closeAll, setCloseTrigger: (t)=>closeTriggers.push(t), content: footnotes[subpart[0] - 1], num: subpart[0] }));
+        lineDOM.push(h(Footnote, { closeAll: closeAll, setCloseTrigger: (t) => closeTriggers.push(t), content: footnotes[subpart[0] - 1], num: subpart[0] }));
         lineDOM.push(' ');
         lineDOM.push(subpart.substr(2));
       } else {
@@ -156,20 +158,35 @@ function ProfessionalItem(props) {
 class Footnote extends Component {
   constructor(props) {
     super(props);
+    this.doCallback = this.doCallback.bind(this);
+    this.wHeight = document.documentElement.clientHeight / pxPerRem;
+    this.wWidth = document.documentElement.clientWidth / pxPerRem;
     this.state.open = false;
     this.close = () => this.setState({ open: false });
-    this.open = () => {props.closeAll(); this.setState({ open: true });};
+    this.open = () => { props.closeAll(); this.setState({ open: true }); };
     props.setCloseTrigger(this.close);
+    this.x = 0;
+    this.width = 26;
+    if (this.wWidth < (26 + 1.5)) {
+      this.width = this.wWidth - 1.5;
+    }
+  }
+  doCallback(e, callback) {
+    e.stopPropagation();
+    e.preventDefault();
+    const clientXRem = e.clientX / pxPerRem;
+    this.x = (clientXRem) < this.width  ? (clientXRem - this.width - ((7 + e.layerX) / pxPerRem)) : 0.1875;
+    callback();
   }
   render(props, state) {
     const contentDOM = props.content
       .split('\n')
-      .map(part=>h('span', {style: 'display: block;'}, part));
+      .map(part => h('span', { style: 'display: block;' }, part));
     return (
       h('div', { className: "footnoteContainer" },
-        h('a', null, h('sup', { className: "footnoteNumber clickable", onMouseDown: (e) => { e.stopPropagation(); e.preventDefault(); this.open(); } }, props.num)),
-        state.open ? h('div', { className: "footnote" },
-          h('a', null, h('span', { className: "closeBtn clickable", onMouseDown: (e) => { e.stopPropagation(); e.preventDefault(); this.close(); } }, 'x')),
+        h('a', null, h('sup', { className: "footnoteNumber clickable", onMouseDown: (e) => this.doCallback(e, this.open) }, props.num)),
+        state.open ? h('div', { className: "footnote", style: `right: ${this.x}rem; width: ${this.width}rem;` },
+          h('a', null, h('span', { className: "closeBtn clickable", onMouseDown: (e) => this.doCallback(e, this.close) }, 'x')),
           h('p', { className: "footnoteContent" }, contentDOM)
         ) : null
       )
@@ -184,7 +201,7 @@ function Invisible(props) {
 function Personal(props) {
   const contentDOM = personalContent
     .split('\n')
-    .map(part=>h('span', {style: 'display: block;'}, part));
+    .map(part => h('span', { style: 'display: block;' }, part));
   return (
     h('div', { id: 'Personal' },
       h('span', { className: 'BodyTitle' }, 'About Me'),

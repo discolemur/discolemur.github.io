@@ -227,7 +227,6 @@ a:hover sup , a:hover span {
 .footnote {
   position: absolute;
   background-color: #FFF;
-  width: 26rem;
   border: 3px solid #AAA;
   right: 0.2rem;
   top: 1.2rem;
@@ -282,14 +281,6 @@ a:hover .closeBtn {
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
   }
-  .footnoteContainer {
-    position: sticky;
-  }
-  .footnote {
-    right: 0;
-    position: sticky;
-    width: 100%;
-  }
 }
 
 @media print, screen and (max-width: 35rem) {
@@ -298,11 +289,5 @@ a:hover .closeBtn {
   }
   #SubIntro #Title, #HeroText #Title , .BodyTitle {
     font-size: 32px;
-  }
-}
-
-@media print, screen and (max-width: 26rem) {
-  .footnote {
-    width: 10rem;
   }
 }
