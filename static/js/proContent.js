@@ -2,22 +2,22 @@
 
 const proContent = [
   {
+    iconSrc: '/static/img/WashU_Informal_Type_(RGB)200-01.png',
+    timeStr: '2018 – Present',
+    title: 'PhD Student (Pre-Doc in Training)',
+    subtitle: 'Washington University in St. Louis',
+    subsubtitle: 'Computational and Systems Biology',
+    description: 'First lab rotation with Dr. Nancy Saccone: genome-wide associations with substance use disorders. We also collaborate with Dr. Ting Wang to associate genetic sequences with epigenetic phenotypes.',
+    ref: 'http://dbbs.wustl.edu/'
+  },
+  {
     iconSrc: '/static/img/kinware.png',
-    timeStr: '2017 – Present',
+    timeStr: '2017 – 2018',
     title: 'Full-Stack App Developer',
     subtitle: 'Kinwaretech',
     subsubtitle: null,
     description: 'We created a competitive solution to a complex and prevalent social issue.\nDeveloped server and client software using NodeJs, Amazon Web Service, DynamoDB, PreactJs, and Cordova.',
     ref: 'http://kinwarekeeper.com/'
-  },
-  {
-    iconSrc: '/static/img/python.svg',
-    timeStr: '2017',
-    title: 'Freelance Python Contractor',
-    subtitle: null, 
-    subsubtitle: null,
-    description: 'Set up MQTT communications onto Asus Tinker Board\nApplied Tensorflow machine learning',
-    ref: null
   },
   {
     iconSrc: '/static/img/moroni_on_the_tyne.png',
@@ -29,11 +29,11 @@ const proContent = [
     ref: 'http://mormon.org' 
   },
   {
-    iconSrc: '/static/img/BYU_medallion.svg',
+    iconSrc: '/static/img/BYU_logo.jpg',
     timeStr: '2011 – 2015',
-    title: 'Bachelor of Science: Bioinformatics',
+    title: 'Bachelor of Science',
     subtitle: 'Brigham Young University',
-    subsubtitle: 'Minors: Mathematics and Computer Science',
+    subsubtitle: 'Bioinformatics',
     description: 'Magna Cum Laude\nHonored Student of the Biology Department\n',
     ref: 'http://byu.edu'
   },
@@ -55,7 +55,7 @@ const proContent = [
     iconSrc: '/static/img/c-line.svg',
     timeStr: '2014',
     title: 'Teacher\'s Assistant',
-    subtitle: 'CS 235',
+    subtitle: 'CS 235 - Data Structures',
     subsubtitle: 'Brigham Young University',
     description: 'Helped students to write, test, and debug C++ code.',
     ref: null
