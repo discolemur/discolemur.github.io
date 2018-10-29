@@ -30,6 +30,11 @@
   background-color: black;
   background-size: contain;
 }
+#TitleCase {
+  background: #0008;
+  padding-top: 0rem;
+  padding-bottom: 0.5rem;
+}
 #HeroText {
   color: white;
   height: 100%;

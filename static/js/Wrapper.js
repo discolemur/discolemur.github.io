@@ -72,8 +72,10 @@ function Intro(props) {
   return (
     h('div', { id: 'intro' },
       h('div', { id: "HeroText" },
-        h('div', { id: 'Title' }, 'NICK JENSEN'),
-        h('div', { id: 'Subtitle' }, 'professional website')
+        h('div', { id: 'TitleCase' },
+          h('div', { id: 'Title' }, 'NICK JENSEN'),
+          h('div', { id: 'Subtitle' }, 'professional website')
+        )
       )
     )
   )
@@ -175,7 +177,7 @@ class Footnote extends Component {
     e.stopPropagation();
     e.preventDefault();
     const clientXRem = e.clientX / pxPerRem;
-    this.x = (clientXRem) < this.width  ? (clientXRem - this.width - ((7 + e.layerX) / pxPerRem)) : 0.1875;
+    this.x = (clientXRem) < this.width ? (clientXRem - this.width - ((7 + e.layerX) / pxPerRem)) : 0.1875;
     callback();
   }
   render(props, state) {

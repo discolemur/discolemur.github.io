@@ -2,7 +2,7 @@
 
 const _LEFT = true;
 const _RIGHT = false;
-const _ANIMATE_STEPS= 20;
+const _ANIMATE_STEPS = 20;
 const _ANIMATE_PAUSE = 10;
 // Between 0 and 1 (percent distance halfway around circle)
 // Smaller values make it more likely to be considered scrolling
@@ -10,6 +10,19 @@ const SCROLL_THRESHOLD = 0.01;
 // Between 0 and 1 (percent distance from one item to next)
 // Smaller values make it bounce back more.
 const BOUNCE_BACK_THRESHOLD = 0.7;
+
+const isZero = (num) => {
+  const epsilon = 0.0001;
+  return Math.abs(num) < epsilon;
+}
+
+class Item {
+  constructor(title, img, progress) {
+    this.title = title;
+    this.img = img;
+    this.progress = progress;
+  }
+}
 
 class Scroll3D extends Component {
   constructor(props) {
@@ -19,16 +32,22 @@ class Scroll3D extends Component {
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
     this._getDisplayText = this._getDisplayText.bind(this);
+    this._rotateOne = this._rotateOne.bind(this);
+    this.rotationLoop = this.rotationLoop.bind(this);
+    this.restartLoop = this.restartLoop.bind(this);
     const total = props.items.length;
     this.step = 2 / total;
     let progress = 0;
     this.state.items = [];
+    // Need to store positions so we can snap items to the grid when done moving.
+    this.positions = [];
     for (let item of props.items) {
-      this.state.items.push({
-        title: item.title,
-        img: item.img,
-        progress: progress
-      });
+      this.positions.push(progress);
+      this.state.items.push(new Item(
+        item.title,
+        item.img,
+        progress
+      ));
       progress += this.step;
       if (progress > 1) {
         progress = -1 + (progress - 1);
@@ -38,6 +57,60 @@ class Scroll3D extends Component {
     this.setState({ scrolling: false });
     this.direction = _RIGHT;
     this.directions = [];
+    this.rotationLoop();
+  }
+  /**
+   * Assigns the position of each item to be its expected final resting point for this rotation.
+   * Essentially snaps all items to a proper position.
+   * This is also the most logical place to reset the loop, in case we clicked on something recently.
+   * @param {*} items 
+   */
+  _assignNearestPosition(items) {
+    for (let i in items) {
+      let mini = 1;
+      let positionsIndex = 0;
+      for (let j in this.positions) {
+        if (Math.abs(this.positions[j] - items[i].progress) < mini) {
+          mini = Math.abs(this.positions[j] - items[i].progress);
+          positionsIndex = j;
+        }
+      }
+      items[i].progress = this.positions[positionsIndex];
+    }
+    this.restartLoop();
+    return items;
+  }
+  restartLoop() {
+    if (this.loopTimer) {
+      clearTimeout(this.loopTimer);
+    }
+    this.rotationLoop();
+  }
+  rotationLoop() {
+    this.loopTimer = setTimeout(() => {
+      if (!this.state.scrolling) {
+        this._rotateOne();
+      }
+      this.rotationLoop();
+    }, 3000);
+  }
+  _rotateOne(clockwise) {
+    if (typeof clockwise != 'boolean') {
+      clockwise = true;
+    }
+
+    let nextItem = null;
+    for (let item of this.state.items) {
+      if (isZero(item.progress)) {
+        continue;
+      }
+      if (!nextItem
+        || (clockwise && item.progress > 0 && item.progress < nextItem.progress)
+        || (!clockwise && item.progress < 0 && item.progress < nextItem.progress)) {
+        nextItem = item;
+      }
+    }
+    this._GoToOne(nextItem);
   }
   _addRecentDirection(dir) {
     if (this.directions.length == 3) {
@@ -117,25 +190,34 @@ class Scroll3D extends Component {
       return item;
     })
   }
-  _move(distance, items) {
+  /**
+   * 
+   * @param {*} distance Final amount (between -1 and 1, which would be 360 degrees by direction) that you want to go in the circle.
+   * @param {*} items 
+   */
+  _move(distance) {
     const amount = distance / _ANIMATE_STEPS;
+    let items = this.state.items;
     const moveABit = (actionCounter) => {
-      items = items.map(item => {
+      items = actionCounter > 1 ? items.map(item => {
         item.progress = item.progress + amount;
         if (item.progress > 1) {
-          item.progress = -1 + (item.progress - 1);
+          item.progress = item.progress - 2;
         }
         if (item.progress < -1) {
-          item.progress = 1 + (item.progress + 1);
+          item.progress = item.progress + 2;
         }
         return item;
-      })
+      }) : this._assignNearestPosition(items);
       this.setState({ items: items, actionCounter: actionCounter - 1 })
     }
-    this.setState({ action:(actionCounter)=>window.setTimeout(()=>moveABit(actionCounter), _ANIMATE_PAUSE), actionCounter: _ANIMATE_STEPS})
+    this.setState({ action: (actionCounter) => window.setTimeout(() => moveABit(actionCounter), _ANIMATE_PAUSE), actionCounter: _ANIMATE_STEPS })
   }
+  /**
+   * @param {*} target item object (held by this.state.items)
+   */
   _GoToOne(target) {
-    this._move(-1 * target.progress, this.state.items)
+    this._move(-1 * target.progress)
     this.setState({ prevX: null, scrolling: false });
   }
   mouseDown(e) {
@@ -168,6 +250,10 @@ class Scroll3D extends Component {
     if (!scrolling && !items.some(item => Math.abs(item.progress) < SCROLL_THRESHOLD)) { this.setState({ scrolling: true }); }
     this.setState({ prevX: newX });
   }
+  /**
+   * Returns bottom text div parameters {leftOpacity, rightOpacity, leftTitle, rightTitle}.
+   * @param {*} items 
+   */
   _getDisplayText(items) {
     let itemRight = this._getMinAbsoluteProgress(items.filter(x => x.progress <= 0));
     let itemLeft = this._getMinAbsoluteProgress(items.filter(x => x.progress >= 0));

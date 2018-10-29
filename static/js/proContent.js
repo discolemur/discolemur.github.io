@@ -7,8 +7,12 @@ const proContent = [
     title: 'PhD Student (Pre-Doc in Training)',
     subtitle: 'Washington University in St. Louis',
     subsubtitle: 'Computational and Systems Biology',
-    description: 'First lab rotation with Dr. Nancy Saccone: genome-wide associations with substance use disorders. We also collaborate with Dr. Ting Wang to associate genetic sequences with epigenetic phenotypes.',
-    ref: 'http://dbbs.wustl.edu/'
+    //description: 'First lab rotation with Dr. Nancy Saccone: genome-wide associations with substance use disorders. We also collaborate with Dr. Ting Wang to associate genetic sequences with epigenetic phenotypes.',
+    description: 'Most recently rotated in the lab of Dr. Celeste Karch: developmental assessment of iPSC[1]-derived neurons using transcriptomics.',
+    ref: 'http://dbbs.wustl.edu/',
+    footnotes: [
+      "Induced Pluripotent Stem Cells (iPSC)"
+    ]
   },
   {
     iconSrc: '/static/img/kinware.png',
@@ -25,7 +29,7 @@ const proContent = [
     title: 'Volunteer Missionary',
     subtitle: 'The Church of Jesus Christ of Latter-day Saints',
     subsubtitle: 'Newcastle Upon Tyne, England',
-    description: 'I helped people live more happily and purposefully.\nI learned to speak Mandarin Chinese and helped international students adjust to a new culture and find friends.\nMy appreciation for both European and Eastern cultures increased.',
+    description: 'I helped people live more happily and purposefully.\nI learned to speak Mandarin Chinese and helped international students adjust to their new environment and find friends.\nMy appreciation for both European and Eastern cultures increased.',
     ref: 'http://mormon.org' 
   },
   {
@@ -43,7 +47,7 @@ const proContent = [
     title: 'Research Assistant',
     subtitle: 'Dr. Seth Bybee\'s Lab',
     subsubtitle: 'Brigham Young University',
-    description: 'Pioneered machine learning method to filter software-predicted homologies, purifying phylogenetic signal especially for species without a reference genome.[1][2]\nTranscriptome assembly and annotation.\nHomolog clustering and filtering.\nPhylogeny construction.[3]',
+    description: 'Co-pioneered machine learning method to filter software-predicted homologies, purifying phylogenetic signal especially for species without a reference genome.[1][2]\nTranscriptome assembly and annotation.\nHomolog clustering and filtering.\nPhylogeny construction.[3]',
     ref: 'http://bybeelab.byu.edu/',
     footnotes: [
       "The OGCleaner: filtering false-positive homology clusters\nMS Fujimoto, A Suvorov, NO Jensen, MJ Clement, Q Snell, SM Bybee\nBioinformatics 33 (1), 125-127",
