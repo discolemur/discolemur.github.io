@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * This object is buggy and will be discontinued. It will be replaced by FadeItemBoard.
+ */
+
 const _LEFT = true;
 const _RIGHT = false;
 const _ANIMATE_STEPS = 20;

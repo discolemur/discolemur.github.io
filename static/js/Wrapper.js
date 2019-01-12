@@ -93,7 +93,7 @@ function SubIntro(props) {
   return (
     h('div', { id: "SubIntro" },
       h('div', { id: "Title" }, "I\'m a creator"),
-      h(Scroll3D, { items: personalScrollItems })
+      h(FadeItemBoard, { items: personalScrollItems })
     )
   )
 }
@@ -217,10 +217,14 @@ function Personal(props) {
             h('span', null, 'See my work'),
             h('img', { src: '/static/img/GitHub-Mark-64px.png' })
           ),
-          h('div', { id: "github-badge" }),
           h('a', { href: "http://www.linkedin.com/in/nick-jensen-92261413a" },
             h('span', null, 'View my profile'),
             h('img', { src: "/static/img/In-2C-41px-R.png" })
+          ),
+          h('a', { href: " https://orcid.org/0000-0002-1177-3418" },
+            h('span', null, 'View my publications'),
+            h('img', { src: "/static/img/ORCIDiD_icon64x64.png" }),
+            h('span', {style: "font-size: 0.8rem;"}, 'https://orcid.org/0000-0002-1177-3418')
           )
         )
       )
