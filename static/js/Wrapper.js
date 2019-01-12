@@ -221,10 +221,14 @@ function Personal(props) {
             h('span', null, 'View my profile'),
             h('img', { src: "/static/img/In-2C-41px-R.png" })
           ),
-          h('a', { href: " https://orcid.org/0000-0002-1177-3418" },
+          h('a', { href: "https://orcid.org/0000-0002-1177-3418" },
             h('span', null, 'View my publications'),
             h('img', { src: "/static/img/ORCIDiD_icon64x64.png" }),
             h('span', {style: "font-size: 0.8rem;"}, 'https://orcid.org/0000-0002-1177-3418')
+          ),
+          h('a', { href: "http://dbbs.wustl.edu/curstudents/Pages/student_bio.aspx?SID=7573" },
+            h('span', null, 'View my student profile'),
+            h('img', { src: "http://dbbs.wustl.edu/Student%20Photos/Jensen_N.jpg", style: "border-radius: 5rem; width: 5rem; height: 5rem; object-fit: cover;" })
           )
         )
       )

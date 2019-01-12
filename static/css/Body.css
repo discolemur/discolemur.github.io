@@ -220,6 +220,9 @@
 #PersonalLinks a:hover {
   color: #999;
 }
+#PersonalLinks a {
+  margin: 1rem;
+}
 
 sup {
   font-family: sans-serif;
