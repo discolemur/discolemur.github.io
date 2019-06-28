@@ -11,7 +11,7 @@ const personalScrollItems = [
         img: '/static/img/python.svg'
     },
     {
-        title: 'Chainmail Artist',
+        title: 'Chainmaille Artist',
         img: '/static/img/dragonscaleSquare.png'
     }
 ]
