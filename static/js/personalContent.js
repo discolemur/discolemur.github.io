@@ -1,7 +1,7 @@
 "use strict";
 
 const personalContent = `
-I grew up on the western edge of the Rocky Mountains. Now, living in the Mid-West, I miss the imposing peaks and dry, thin, mountain air.
-Still, as I enter proper adulthood, I look forward to new surroundings and experiences. I've been to nine countries, lived abroad for a total of about two and a half years, and speak Mandarin Chinese at an intermediate level.
-I maintain a diverse array of interests and hobbies. I weave chainmail jewelry and crochet ties. I casually play several instruments. My favorite painters are Vermeer and Renoir. I have a new favorite musician each month. I love learning about how the universe works, from the macro to micro. Above this paragraph is a composite image of the 2017 solar eclipse that I took through my telescope (no filter, except the moon).
+I grew up on the western edge of the Rocky Mountains: hiking, fishing, camping, and running marathons in the shadow of imposing peaks through dry, thin, mountain air.
+Now, studying in the mid-West, I look forward to new surroundings and experiences. I've been to nine countries, lived abroad for over two years, and have studied Hebrew and Mandarin.
+Family, religion, and career are the most important parts of my life, and these consume most of my time. Still, I maintain a diverse array of interests and hobbies, and an ongoing project or two is always on my desk. Among my interests, I enjoy running, music, chainmaille, crochet, astronomy, programming, and electronics.
 `

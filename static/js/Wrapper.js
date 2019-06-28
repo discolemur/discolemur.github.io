@@ -1,5 +1,7 @@
 "use strict";
 
+// TODO fix the way footnote close button can be hidden on mobile.
+
 const pxPerRem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 class Wrapper extends Component {
@@ -99,7 +101,7 @@ function SubIntro(props) {
 }
 
 function Professional(props) {
-  const items = proContent.map(elem => ProfessionalItem(elem));
+  const items = proContent.map(elem => elem.display ? ProfessionalItem(elem) : null);
   return (
     h('div', { id: 'Professional' },
       h('span', { className: 'BodyTitle' }, 'Professional Background'),
@@ -203,7 +205,7 @@ function Invisible(props) {
 function Personal(props) {
   const contentDOM = personalContent
     .split('\n')
-    .map(part => h('span', { style: 'display: block;' }, part));
+    .map(part => h('span', { style: 'display: block; padding-bottom: 1rem;' }, part));
   return (
     h('div', { id: 'Personal' },
       h('span', { className: 'BodyTitle' }, 'About Me'),
@@ -240,7 +242,7 @@ function Footer(props) {
   const footnotes = [];
   return (
     h('div', { id: 'Footer' },
-      h('p', null, '© 2018 Nick Jensen — Hosted on GitHub Pages'),
+      h('p', null, '© 2019 Nick Jensen — Hosted on GitHub Pages'),
       h('div', null,
         h('span', { id: 'credits' }, 'Icon made from ',
           h('a', { href: "http://www.onlinewebfonts.com/icon" }, 'Icon Fonts'),

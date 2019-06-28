@@ -186,10 +186,12 @@
 #PersonalPhoto {
   flex-grow: 1;
   width: 100%;
+  display: block;
 }
 #PersonalPhoto img {
-  max-width: 160px;
   border: 2px solid #AAA;
+  max-width: 80%;
+  margin: auto;
 }
 #PersonalParagraph {
   width: 100%;

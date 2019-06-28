@@ -2,28 +2,32 @@
 
 const proContent = [
   {
+    display: true,
     iconSrc: '/static/img/WashU_Informal_Type_(RGB)200-01.png',
     timeStr: '2018 – Present',
-    title: 'PhD Student (Pre-Doc in Training)',
+    title: 'PhD Student',
     subtitle: 'Washington University in St. Louis',
     subsubtitle: 'Computational and Systems Biology',
     //description: 'First lab rotation with Dr. Nancy Saccone: genome-wide associations with substance use disorders. We also collaborate with Dr. Ting Wang to associate genetic sequences with epigenetic phenotypes.',
-    description: 'Most recently rotated in the lab of Dr. Celeste Karch: developmental assessment of iPSC[1]-derived neurons using transcriptomics.',
+    //description: 'Most recently rotated in the lab of Dr. Celeste Karch: developmental assessment of iPSC[1]-derived neurons using transcriptomics.',
+    description: 'Recently joined the lab of Dr. Zach Pincus: C. elegans as a model for longevity, and a collaboration on zebrafish spinal cord regeneration.',
     ref: 'http://dbbs.wustl.edu/',
     footnotes: [
-      "Induced Pluripotent Stem Cells (iPSC)"
+      //"Induced Pluripotent Stem Cells (iPSC)"
     ]
   },
   {
+    display: true,
     iconSrc: '/static/img/kinware.png',
     timeStr: '2017 – 2018',
     title: 'Full-Stack App Developer',
     subtitle: 'Kinwaretech',
     subsubtitle: null,
     description: 'We created a competitive solution to a complex and prevalent social issue.\nDeveloped server and client software using NodeJs, Amazon Web Service, DynamoDB, PreactJs, and Cordova.',
-    ref: 'http://kinwarekeeper.com/'
+  //  ref: 'http://kinwarekeeper.com/'
   },
   {
+    display: true,
     iconSrc: '/static/img/moroni_on_the_tyne.png',
     timeStr: '2015 – 2017',
     title: 'Volunteer Missionary',
@@ -33,6 +37,7 @@ const proContent = [
     ref: 'http://mormon.org' 
   },
   {
+    display: true,
     iconSrc: '/static/img/BYU_logo.jpg',
     timeStr: '2011 – 2015',
     title: 'Bachelor of Science',
@@ -42,6 +47,7 @@ const proContent = [
     ref: 'http://byu.edu'
   },
   {
+    display: true,
     iconSrc: '/static/img/dragonfly.png',
     timeStr: '2014 – 2015',
     title: 'Research Assistant',
@@ -56,6 +62,7 @@ const proContent = [
     ]
   },
   {
+    display: false,
     iconSrc: '/static/img/c-line.svg',
     timeStr: '2014',
     title: 'Teacher\'s Assistant',
