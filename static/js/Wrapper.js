@@ -211,7 +211,7 @@ function Personal(props) {
       h('span', { className: 'BodyTitle' }, 'About Me'),
       h('div', { id: 'PersonalContent' },
         h('div', { id: "PersonalPhoto" },
-          h('img', { src: "/static/img/sitting.jpg" })
+          h('img', { src: "/static/img/personal.jpg" })
         ),
         h('div', { id: 'PersonalParagraph' }, contentDOM),
         h('div', { id: 'PersonalLinks' },
